@@ -14,7 +14,8 @@ def init_cards():
 
 def deal_card(hand):
     cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-    return
+    hand.append(random.choice(cards))
+    return hand
 
 def score (hand,user):
     score = 0
@@ -73,8 +74,26 @@ if play == 'y':
             exit()
         elif hit =='y':
             player_cards = deal_card(player_cards)
-        else:
-            continue
+            player_score = score(player_cards, 'Player')
+            keep_playing = blackjack(player_cards, 'Player')
+            if computer_score < 17:
+                computer_cards = deal_card(computer_cards)
+                computer_score = score(computer_cards,'Computer')
+                keep_playing = blackjack(computer_cards,'Computer')
+
+        elif hit =='n':
+            if computer_score < 17:
+                computer_cards = deal_card(computer_cards)
+                computer_score = score(computer_cards,'Computer')
+                keep_playing = blackjack(computer_cards,'Computer')
+            else:
+                if computer_score > player_score:
+                    print(f"Dealer has {computer_score} while Player has {player_score}. Dealer WINS!!!!")
+                elif player_score > computer_score:
+                    print(f"Player has {player_score} while Dealer has {computer_score}. Player WINS!!!!")
+                else:
+                    print (f"Player has {player_score} while Dealer has {computer_score}. DRAW!!!!")
+
 else:
     print ("Goodbye Player!")
 
