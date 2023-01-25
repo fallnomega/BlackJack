@@ -12,7 +12,8 @@ def init_cards():
     return initial_cards
 
 
-def deal_card():
+def deal_card(hand):
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
     return
 
 def score (hand,user):
@@ -54,22 +55,28 @@ play = 'y'
 keep_playing = False
 if play == 'y':
     keep_playing = True
-
-
-
-while keep_playing == True:
-    testing_hand = [11,10,11]
-    keep_playing = blackjack(testing_hand,'TESTING')
+    # testing_hand = [11,10,10]
+    # keep_playing = blackjack(testing_hand,'TESTING')
     player_cards = init_cards()
-    print(f"Your cards: {player_cards}")
+    print(f"Your cards: {player_cards} and Computer's first card: {player_cards[0]}")
     computer_cards = init_cards()
-    print(f"Computer's first card: {player_cards[0]}")
-    player_score  = score(player_cards,'Player')
+    player_score = score(player_cards,'Player')
     computer_score = score(computer_cards,"Dealer")
     keep_playing = blackjack(player_cards,'Player')
     keep_playing = blackjack(computer_cards,'Dealer')
-    print(f"player score = {player_score}")
-    print(f"computers score = {computer_score}")
+    while keep_playing == True:
+        print(f"Player's score = {player_score} and Dealer's score = {computer_score}")
+        print(f"")
+        hit = input("Deal another card? [y/n]").lower()
+        if hit != 'y' and hit !='n':
+            print("Wrong selection, exitting program")
+            exit()
+        elif hit =='y':
+            player_cards = deal_card(player_cards)
+        else:
+            continue
+else:
+    print ("Goodbye Player!")
 
 
 
