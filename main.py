@@ -89,10 +89,13 @@ if play == 'y':
             else:
                 if computer_score > player_score:
                     print(f"Dealer has {computer_score} while Player has {player_score}. Dealer WINS!!!!")
+                    keep_playing=False
                 elif player_score > computer_score:
                     print(f"Player has {player_score} while Dealer has {computer_score}. Player WINS!!!!")
+                    keep_playing = False
                 else:
                     print (f"Player has {player_score} while Dealer has {computer_score}. DRAW!!!!")
+                    keep_playing = False
 
 else:
     print ("Goodbye Player!")
