@@ -1,25 +1,79 @@
+import random
+
 from art import logo
 
 def init_cards():
-    return
+    initial_cards = []
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    for x in range(2):
+        initial_cards.append(random.choice(cards))
+    # print (initial_cards)
+
+    return initial_cards
 
 
 def deal_card():
     return
 
-# play= input("Do you want to play a game of Black Jack? Type 'y' or 'n': ")
+def score (hand,user):
+    score = 0
+    for x in hand:
+        score+=x
+    return score
+
+def blackjack(hand,user):
+    score = 0
+    for x in hand:
+        score+=x
+    if int(score) == 21:
+        print(f"{user} with a hand of {hand} has a Black Jack, WE HAVE A WINNER!")
+        exit()
+    elif int(score) > 21:
+        for x in hand:
+            if x == 11 and (score - 10) > 21:
+                print(f"{user}'s score is {score} which is above 21 even with adjusting the Ace to 1. {user} loses the game!")
+                exit()
+            elif x == 11 and (score - 10) == 21:
+                print(f"{user} with a hand of {hand} has a Black Jack due to Ace being a 1 in this case thus making the score {score-10}, WE HAVE A WINNER!")
+                exit()
+
+        print(f"{user} with a {hand} totaling {score} loses the game")
+        exit()
+
+    else:
+        return True
+
+
+
+
+
 print(logo)
 print("Do you want to play a game of Black Jack? Type 'y' or 'n': ")
+play = 'y'
+# play= input("Do you want to play a game of Black Jack? Type 'y' or 'n': ")
+keep_playing = False
+if play == 'y':
+    keep_playing = True
 
-dealer = 0
-player = 0
 
-############### Blackjack Project #####################
 
-#Difficulty Normal 😎: Use all Hints below to complete the project.
-#Difficulty Hard 🤔: Use only Hints 1, 2, 3 to complete the project.
-#Difficulty Extra Hard 😭: Only use Hints 1 & 2 to complete the project.
-#Difficulty Expert 🤯: Only use Hint 1 to complete the project.
+while keep_playing == True:
+    testing_hand = [11,10,11]
+    keep_playing = blackjack(testing_hand,'TESTING')
+    player_cards = init_cards()
+    print(f"Your cards: {player_cards}")
+    computer_cards = init_cards()
+    print(f"Computer's first card: {player_cards[0]}")
+    player_score  = score(player_cards,'Player')
+    computer_score = score(computer_cards,"Dealer")
+    keep_playing = blackjack(player_cards,'Player')
+    keep_playing = blackjack(computer_cards,'Dealer')
+    print(f"player score = {player_score}")
+    print(f"computers score = {computer_score}")
+
+
+
+
 
 ############### Our Blackjack House Rules #####################
 
